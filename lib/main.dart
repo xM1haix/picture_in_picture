@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:permission_handler/permission_handler.dart';
+import "package:flutter/material.dart";
+import "package:flutter/services.dart";
+import "package:permission_handler/permission_handler.dart";
 
 void main() async {
   await Permission.storage.request();
@@ -28,13 +28,15 @@ class Page extends StatefulWidget {
 }
 
 class ScreenCapture {
-  static const platform = MethodChannel('com.example/screen_capture');
+  const ScreenCapture(this.x);
+  static const platform = MethodChannel("com.example/screen_capture");
+  final int x;
 
   static Future<void> startCapture() async {
     try {
-      await platform.invokeMethod('startCapture');
+      await platform.invokeMethod("startCapture");
     } on PlatformException catch (e) {
-      print("Failed to start screen capture: '${e.message}'.");
+      debugPrint("Failed to start screen capture: '${e.message}'.");
     }
   }
 }
