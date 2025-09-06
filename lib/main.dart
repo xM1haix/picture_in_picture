@@ -2,18 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-class ScreenCapture {
-  static const platform = MethodChannel('com.example/screen_capture');
-
-  static Future<void> startCapture() async {
-    try {
-      await platform.invokeMethod('startCapture');
-    } on PlatformException catch (e) {
-      print("Failed to start screen capture: '${e.message}'.");
-    }
-  }
-}
-
 void main() async {
   await Permission.storage.request();
   await Permission.systemAlertWindow.request();
@@ -39,6 +27,18 @@ class Page extends StatefulWidget {
   State<Page> createState() => _PageState();
 }
 
+class ScreenCapture {
+  static const platform = MethodChannel('com.example/screen_capture');
+
+  static Future<void> startCapture() async {
+    try {
+      await platform.invokeMethod('startCapture');
+    } on PlatformException catch (e) {
+      print("Failed to start screen capture: '${e.message}'.");
+    }
+  }
+}
+
 class _PageState extends State<Page> {
   @override
   Widget build(BuildContext context) {
@@ -52,4 +52,3 @@ class _PageState extends State<Page> {
     );
   }
 }
-// [com.google.android.calendar, com.android.camera2, com.android.chrome, com.google.android.deskclock, com.google.android.contacts, com.tefis.dentalignment, com.google.android.documentsui, com.android.gallery3d, com.google.android.googlequicksearchbox, com.android.vending, com.google.android.apps.maps, com.google.android.apps.messaging, com.google.android.dialer, com.android.stk, com.android.settings, com.android.traceur, com.example.picture_in_picture]
