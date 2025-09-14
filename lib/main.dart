@@ -8,7 +8,9 @@ void main() async {
   runApp(const MyApp());
 }
 
+///Main skelethon of the app
 class MyApp extends StatelessWidget {
+  ///
   const MyApp({super.key});
 
   @override
@@ -20,18 +22,27 @@ class MyApp extends StatelessWidget {
   }
 }
 
+///Main skelethon of the app
 class Page extends StatefulWidget {
+  ///
   const Page({super.key});
 
   @override
   State<Page> createState() => _PageState();
 }
 
+///Object which calls the [MethodChannel] to to capture the screen
 class ScreenCapture {
+  ///
   const ScreenCapture(this.x);
+
+  /// The [MethodChannel]
   static const platform = MethodChannel("com.example/screen_capture");
+
+  /// IDK what was this for
   final int x;
 
+  ///[Future] which calls 'startCapture' on [platform]
   static Future<void> startCapture() async {
     try {
       await platform.invokeMethod("startCapture");
